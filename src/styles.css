@@ -90,3 +90,27 @@ h1 {
 	border-radius:5px;
 	box-shadow: 10px 10px 5px rgba(0,0,0,0.2);
 }
+
+.alert-title{
+	float:left;margin-left:10px;
+}
+
+.alert-close{
+	float:right;margin-right:10px;
+}
+
+.alert-content{
+	padding:10px;
+	white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+td span{
+	background:red;
+	padding:5px;
+	border-radius: 5px;
+	color:white;
+	cursor: pointer;
+}
+

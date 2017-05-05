@@ -13,13 +13,13 @@
 	     <div class="col-md-6 col-sm-12 item cont-height">
 	        <div class="card cont-height" >
 			  <div class="card-header">
-			    <a class="float-left">Schedules</a>
-			    <a class="float-right" (click)="clearall()">Clear all</a>
+			    <a class="float-left"><i class="fa fa fa-calendar-check-o" aria-hidden="true"></i> Schedules</a>
+			    <a class="float-right" (click)="clearall()"><i class="fa fa-trash-o" aria-hidden="true"></i> Clear all</a>
 			  </div>
 			  <div class="card-block enablescroll">
 				  <div class="row ">
 					  <div class="container">
-					  		<table *ngIf = "savedlist.length" class="table table-hover table-responsive">
+					  		<table *ngIf = "savedlist" class="table table-hover table-responsive">
 							  <thead>
 							    <tr>
 							      <th>#</th>
@@ -29,12 +29,12 @@
 							      <th>Delete</th>
 							    </tr>
 							  </thead>
-							  <tbody *ngFor="let item of savedlist; let i = index" >
+							  <tbody *ngFor="let item of savedlist ; let i = index" >
 							     <td>{{i + 1}}</td>
 							     <td class="s-col">{{item.label}}</td>
 							     <td >{{item.datetime}}</td>
 							     <td>{{item.meridian}}</td>
-							     <td>Delete</td>
+							     <td><span (click)="remove(i)">Delete</span></td>
 							  </tbody>
 							</table>
 					  </div>
@@ -47,9 +47,9 @@
 	     <div class="col-md-6 col-sm-12 item cont-height">
 	     	<div class="card cont-height">
 			  <div class="card-header">
-			    Set Alarm
+			    <i class="fa fa-bell-o" aria-hidden="true"></i> Set Alarm
 			  </div>
-			  <div class="card-block">
+			  <div class="card-block enablescroll">
 				  <div class="row ">
 					  <div class="container">
 
@@ -69,13 +69,13 @@
 							      [(ngModel)]="datetime" class="form-control" required ng2-datetime-picker date-format="DD-MM-YYYY hh:mm"  name="datetime" year="2014"
 							      month="12"
 							      day="31"
-							      hour="23"
+							      hour="12"
 							      minute='59' [close-on-select]="false" #dtime="ngModel" />
 							    <div  *ngIf="dtime.errors && (dtime.dirty || dtime.touched)" class="form-control-feedback ">Invalide date & time</div> 
 						  </div>
 						</div>
 						<div class="form-group row">
-						  <label for="example-text-input" class="col-md-4 col-form-label">Select Meridian*:</label>
+						  <label for="example-text-input" class="col-md-4 col-form-label">AM/PM*:</label>
 						  <div class="col-md-8 ">
 						  		<div class="form-check form-check-inline">
 								  <label class="form-check-label">
@@ -91,29 +91,29 @@
 						  </div>
 						</div>
 						<div class="form-group row">
-						  <label for="example-text-input" class="col-md-4 col-form-label">Alarm type*:</label>
+						  <label for="example-text-input" class="col-md-4 col-form-label">Alarm:</label>
 						  <div class="col-md-8 ">
 						  		<div class="form-check form-check-inline">
 								  <label class="form-check-label">
-					            <input class="form-check-input" required type="checkbox" name="sound" [(ngModel)]="sound"> Everyday
+					            <input class="form-check-input" required type="checkbox" name="everyday" [(ngModel)]="everyday" > Everyday on same time
 					          </label>
 								</div>
 						  </div>
 						</div>
-						<!-- <div class="form-group row">
+						 <div class="form-group row">
 					      <label class="col-md-4">Sound</label>
 					      <div class="col-md-8">
 					        <div class="form-check">
 					          <label class="form-check-label">
-					            <input class="form-check-input" required type="checkbox" name="sound" [(ngModel)]="sound">    Enable
+					            <input class="form-check-input" required type="checkbox" name="sound" [(ngModel)]="sound" >    Enable
 					          </label>
 					        </div>
 					      </div>
-					    </div> -->
+					    </div> 
 					    </form>
 
 					  </div>
-				  </div><br><br>
+				  </div>
 				  <div class="row">
 				    <div class="col-md-12">
 				       <button type="submit" [disabled]="!labels || !dtime || !meridian"  class="btn btn-light btn-primary float-right" (click)="submit()">Save</button>
@@ -127,10 +127,16 @@
     </div>
 </div>
 <nav class="navbar fixed-bottom navbar-light bg-faded">
-  <a  align="center" href="#">Alarm Desk</a>
+  <a  align="center" href="https://github.com/aadityanj/AlarmDesk" target="_blank">Download AlarmDesk</a>
 </nav>
 
-<div class="notification">
-
+<div *ngIf="notify" class="notification">
+	<div class="alert-title">
+	    <i class="fa fa-bullhorn" aria-hidden="true"></i> Alert
+	</div>
+	<div class="alert-close" (click) = "close()">
+	    <i class="fa fa-times" aria-hidden="true"></i>
+	</div>
+	<div class="clearfix"></div>
+	<div class="alert-content">{{message}}</div>
 </div>
-
