@@ -57,7 +57,7 @@ export class AppComponent {
         if(flag == 1 ) {
            if(this.flagforsound){
                var audio = new Audio();
-               audio.src = "app/home/warning.mp3";
+               audio.src = "app/tones/warning.mp3";
                audio.load();
                audio.play();
                setTimeout(function() {
