@@ -1,0 +1,136 @@
+<div id="body">
+	<div class="container Aligner ">
+	  <!-- <div class="mtop-50"></div> -->
+
+	  <div class="row Aligner-item  customer-container ">
+	  <!-- left container-->
+		   
+	    <div class="col-12 item " align="center">
+	   		 <h1 class="plainbg"><img src="app/home/alaram.png" class="cus-img">Alarm Desk</h1>
+	    </div>
+
+
+	     <div class="col-md-6 col-sm-12 item cont-height">
+	        <div class="card cont-height" >
+			  <div class="card-header">
+			    <a class="float-left">Schedules</a>
+			    <a class="float-right" (click)="clearall()">Clear all</a>
+			  </div>
+			  <div class="card-block enablescroll">
+				  <div class="row ">
+					  <div class="container">
+					  		<table *ngIf = "savedlist.length" class="table table-hover table-responsive">
+							  <thead>
+							    <tr>
+							      <th>#</th>
+							      <th>Label</th>
+							      <th>Date&time</th>
+							      <th>AM/PM</th>
+							      <th>Delete</th>
+							    </tr>
+							  </thead>
+							  <tbody *ngFor="let item of savedlist; let i = index" >
+							     <td>{{i + 1}}</td>
+							     <td class="s-col">{{item.label}}</td>
+							     <td >{{item.datetime}}</td>
+							     <td>{{item.meridian}}</td>
+							     <td>Delete</td>
+							  </tbody>
+							</table>
+					  </div>
+				  </div>
+			  </div>
+			</div>
+	     </div>
+	    <!-- right container -->
+
+	     <div class="col-md-6 col-sm-12 item cont-height">
+	     	<div class="card cont-height">
+			  <div class="card-header">
+			    Set Alarm
+			  </div>
+			  <div class="card-block">
+				  <div class="row ">
+					  <div class="container">
+
+					    <form>
+					  	<div class="form-group row ">
+						  <label for="example-text-input" class="col-md-4 col-form-label">Label*:</label>
+						  <div class="col-md-8"> 
+						    <input class="form-control" type="text" required name="label"   [(ngModel)]="label"  id="example-text-input" placeholder="eg: wakeup alaram" #labels="ngModel">
+						    <div  *ngIf="labels.errors && (labels.dirty || labels.touched)" class="form-control-feedback ">Invalide label</div>
+						   
+						  </div>
+						</div>
+						<div class="form-group row">
+						  <label for="example-text-input" class="col-md-4 col-form-label">Date - Time*:</label>
+						  <div class="col-md-8 ">
+						  		<input
+							      [(ngModel)]="datetime" class="form-control" required ng2-datetime-picker date-format="DD-MM-YYYY hh:mm"  name="datetime" year="2014"
+							      month="12"
+							      day="31"
+							      hour="23"
+							      minute='59' [close-on-select]="false" #dtime="ngModel" />
+							    <div  *ngIf="dtime.errors && (dtime.dirty || dtime.touched)" class="form-control-feedback ">Invalide date & time</div> 
+						  </div>
+						</div>
+						<div class="form-group row">
+						  <label for="example-text-input" class="col-md-4 col-form-label">Select Meridian*:</label>
+						  <div class="col-md-8 ">
+						  		<div class="form-check form-check-inline">
+								  <label class="form-check-label">
+								    <input class="form-check-input" required type="radio" name="meridian" [(ngModel)]="meridian" value="am" > AM
+								  </label>
+								</div>
+								<div class="form-check form-check-inline">
+								  <label class="form-check-label">
+								    <input class="form-check-input" required type="radio" name="meridian" [(ngModel)]="meridian" value="pm" > PM
+								  </label>
+								</div>	
+								
+						  </div>
+						</div>
+						<div class="form-group row">
+						  <label for="example-text-input" class="col-md-4 col-form-label">Alarm type*:</label>
+						  <div class="col-md-8 ">
+						  		<div class="form-check form-check-inline">
+								  <label class="form-check-label">
+					            <input class="form-check-input" required type="checkbox" name="sound" [(ngModel)]="sound"> Everyday
+					          </label>
+								</div>
+						  </div>
+						</div>
+						<!-- <div class="form-group row">
+					      <label class="col-md-4">Sound</label>
+					      <div class="col-md-8">
+					        <div class="form-check">
+					          <label class="form-check-label">
+					            <input class="form-check-input" required type="checkbox" name="sound" [(ngModel)]="sound">    Enable
+					          </label>
+					        </div>
+					      </div>
+					    </div> -->
+					    </form>
+
+					  </div>
+				  </div><br><br>
+				  <div class="row">
+				    <div class="col-md-12">
+				       <button type="submit" [disabled]="!labels || !dtime || !meridian"  class="btn btn-light btn-primary float-right" (click)="submit()">Save</button>
+				     </div>  
+				  </div>
+			  </div>
+			</div>
+	     </div>
+
+	  </div>
+    </div>
+</div>
+<nav class="navbar fixed-bottom navbar-light bg-faded">
+  <a  align="center" href="#">Alarm Desk</a>
+</nav>
+
+<div class="notification">
+
+</div>
+
