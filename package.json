@@ -1,7 +1,7 @@
 {
-  "name": "angular-quickstart",
+  "name": "Alarm-desk",
   "version": "1.0.0",
-  "description": "QuickStart package.json from the documentation, supplemented with testing support",
+  "description": "Simple alarm app in Angular2 ",
   "scripts": {
     "build": "tsc -p src/",
     "build:watch": "tsc -p src/ -w",
