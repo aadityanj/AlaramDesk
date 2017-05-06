@@ -65,7 +65,7 @@ h1 {
 }
 
 .enablescroll{
-	overflow: scroll;
+	overflow: auto;
 }
 
 .s-col{
